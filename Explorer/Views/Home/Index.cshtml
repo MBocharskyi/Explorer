@@ -1,0 +1,46 @@
+﻿@section scripts{
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/app")
+}
+<div id="bodyContainer" ng-app="ExplorerApp">
+    <div ng-controller="ExplorerCtrl" ng-init="Init()">
+
+        <table>
+            <thead>
+                <tr class="tableheader">
+                    <td align="center">Less 10MB</td>
+                    <td align="center"> 10MB - 50MB</td>
+                    <td align="center">More 100MB</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td align="center">{{CountOfFilesLessThanTenMb}}</td>
+                    <td align="center">{{CountOfFilesMoreThanTenAndLessThanFiftyOneMb}}</td>
+                    <td align="center">{{CountOfFilesMoreThanOneHundredMb}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ul>
+            <li ng-repeat="drive in Drives">
+                <a ng-click="driveClick(drive)">{{drive}}</a>
+            </li>
+        </ul>
+
+        <ul>
+            <li ng-if="CurrentPath!=null">{{'Current path '+CurrentPath}}</li>
+            <li ng-if="ParentPath!=null"><a ng-click="parentFolderClick(ParentPath)" data-bind="{{ParentPath}}">..</a></li>
+
+            <li ng-repeat="directory in Directories">
+                <a ng-click="directoryClick(directory)">{{directory.Name}}</a>
+            </li>
+        </ul>
+
+        <ul>
+            <li ng-repeat="file in Files">
+                <p>{{file.Name}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
